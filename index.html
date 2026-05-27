@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Your Name</title>
+    <meta
+      name="description"
+      content="Персональный сайт-портфолио: проекты, навыки и контакты."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#home">PORTFOLIO</a>
+        <nav>
+          <a href="#about">Обо мне</a>
+          <a href="#projects">Проекты</a>
+          <a href="#contact">Контакты</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero container reveal">
+        <p class="eyebrow">WEB DEVELOPER / DESIGN-MINDED</p>
+        <h1>Создаю быстрые и выразительные сайты для реальных задач.</h1>
+        <p class="lead">
+          Помогаю запускать проекты аккуратно: от идеи и структуры до готового
+          продакшн-деплоя.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">Смотреть проекты</a>
+          <a class="btn btn-ghost" href="#contact">Связаться</a>
+        </div>
+        <ul class="metrics">
+          <li><strong>12+</strong><span>запущенных сайтов</span></li>
+          <li><strong>98/100</strong><span>средний Lighthouse</span></li>
+          <li><strong>4 года</strong><span>коммерческого опыта</span></li>
+        </ul>
+      </section>
+
+      <section class="container about reveal" id="about">
+        <h2>Обо мне</h2>
+        <p>
+          Я разрабатываю интерфейсы с упором на читаемость, скорость и чистую
+          архитектуру. Люблю превращать сложные процессы в понятные экраны и
+          предсказуемый пользовательский опыт.
+        </p>
+        <div class="tags">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>React</span>
+          <span>Next.js</span>
+          <span>Vercel</span>
+        </div>
+      </section>
+
+      <section class="container reveal" id="projects">
+        <div class="section-head">
+          <h2>Избранные проекты</h2>
+          <p>Небольшая подборка последних работ.</p>
+        </div>
+        <div class="project-grid">
+          <article class="card">
+            <h3>Landing для онлайн-курса</h3>
+            <p>
+              Рост конверсии на 34% после редизайна структуры, акцентов и форм
+              захвата.
+            </p>
+            <a href="#" aria-label="Открыть проект 1">Посмотреть кейс</a>
+          </article>
+          <article class="card">
+            <h3>Портал внутренней аналитики</h3>
+            <p>
+              Собрал рабочий интерфейс с фильтрами, графиками и адаптацией под
+              мобильные устройства.
+            </p>
+            <a href="#" aria-label="Открыть проект 2">Посмотреть кейс</a>
+          </article>
+          <article class="card">
+            <h3>Магазин цифровых продуктов</h3>
+            <p>
+              Оптимизировал каталог и checkout, что сократило время покупки на
+              27%.
+            </p>
+            <a href="#" aria-label="Открыть проект 3">Посмотреть кейс</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="container contact reveal" id="contact">
+        <h2>Давайте обсудим ваш проект</h2>
+        <p>
+          Пишите на почту:
+          <a href="mailto:hello@example.com">hello@example.com</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> Your Name. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
