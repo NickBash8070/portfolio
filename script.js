@@ -2,7 +2,6 @@ const menuButton = document.getElementById("menu-button");
 const menuClose = document.getElementById("menu-close");
 const mobileMenu = document.getElementById("mobile-menu");
 const menuLinks = document.querySelectorAll(".mobile-menu a");
-const heroTime = document.getElementById("hero-time");
 const caseCards = document.querySelectorAll(".work-card");
 const caseArrows = document.querySelectorAll(".work-arrow");
 const workSwitchButtons = document.querySelectorAll(".work-switch-btn");
@@ -10,6 +9,14 @@ const contactSection = document.getElementById("contact");
 const siteFooter = document.getElementById("site-footer");
 
 let lastFocusedElement = null;
+
+const syncMobileMenuActiveState = () => {
+  const currentHash = window.location.hash || "#home";
+  menuLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    link.classList.toggle("is-active", href === currentHash);
+  });
+};
 
 const markSiteReady = () => {
   document.body.classList.add("site-ready");
@@ -22,21 +29,6 @@ if (document.readyState === "complete") {
 }
 
 if (siteFooter) siteFooter.classList.add("is-visible");
-
-if (heroTime) {
-  const timeFormatter = new Intl.DateTimeFormat("ru-RU", {
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Asia/Novosibirsk",
-  });
-  const updateHeroTime = () => {
-    const value = timeFormatter.format(new Date());
-    if (heroTime) heroTime.textContent = value;
-  };
-
-  updateHeroTime();
-  window.setInterval(updateHeroTime, 60_000);
-}
 
 const getMenuFocusable = () => {
   if (!mobileMenu) return [];
@@ -52,6 +44,7 @@ const setMenuState = (isOpen) => {
   if (mobileMenu) mobileMenu.setAttribute("aria-hidden", String(!isOpen));
 
   if (isOpen) {
+    syncMobileMenuActiveState();
     lastFocusedElement = document.activeElement;
     const [firstFocusable] = getMenuFocusable();
     if (firstFocusable) firstFocusable.focus();
@@ -71,7 +64,16 @@ if (menuButton) {
 if (menuClose) menuClose.addEventListener("click", () => setMenuState(false));
 
 menuLinks.forEach((link) => {
-  link.addEventListener("click", () => setMenuState(false));
+  link.addEventListener("click", () => {
+    const href = link.getAttribute("href");
+    menuLinks.forEach((node) => {
+      node.classList.toggle("is-active", node === link);
+    });
+    setMenuState(false);
+    if (href) {
+      window.setTimeout(syncMobileMenuActiveState, 120);
+    }
+  });
 });
 
 caseCards.forEach((card) => {
@@ -129,6 +131,8 @@ window.addEventListener("scroll", () => {
 });
 
 document.body.classList.toggle("header-scrolled", window.scrollY > 12);
+syncMobileMenuActiveState();
+window.addEventListener("hashchange", syncMobileMenuActiveState);
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
@@ -158,31 +162,145 @@ window.addEventListener("keydown", (event) => {
 });
 
 const revealNodes = document.querySelectorAll(".reveal");
-const splitTextNodes = document.querySelectorAll(".split-text");
+const splitTextNodes = Array.from(document.querySelectorAll(".split-text"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const shouldRevealImmediately = prefersReducedMotion || Boolean(window.location.hash);
 
-splitTextNodes.forEach((target) => {
-  const words = (target.textContent || "").trim().split(/\s+/).filter(Boolean);
-  target.textContent = "";
+const createSplitWord = (token) => {
+  const word = document.createElement("span");
+  word.className = "split-word";
+  word.setAttribute("aria-hidden", "true");
+  word.textContent = token;
+  return word;
+};
 
-  words.forEach((word, index) => {
-    const span = document.createElement("span");
-    span.className = "split-char";
-    span.textContent = index === words.length - 1 ? word : `${word}\u00A0`;
-    span.style.transitionDelay = `${index * 70}ms`;
-    target.appendChild(span);
+const buildSplitText = (target) => {
+  const originalMarkup = target.dataset.splitSource || target.innerHTML;
+  if (!target.dataset.splitSource) {
+    target.dataset.splitSource = originalMarkup;
+  }
+
+  const wasVisible = target.classList.contains("visible");
+  const template = document.createElement("template");
+  template.innerHTML = originalMarkup;
+
+  const accessibleText = (template.content.textContent || "").replace(/\s+/g, " ").trim();
+  if (accessibleText) {
+    target.setAttribute("aria-label", accessibleText);
+  }
+
+  target.innerHTML = "";
+  target.classList.add("split-text-lines");
+
+  template.content.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const tokens = (node.textContent || "").replace(/\s+/g, " ").match(/\S+\s*/g) || [];
+      tokens.forEach((token) => {
+        target.appendChild(createSplitWord(token));
+      });
+      return;
+    }
+
+    if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === "BR") {
+      const lineBreak = document.createElement("br");
+      lineBreak.className = "split-break";
+      lineBreak.setAttribute("aria-hidden", "true");
+      target.appendChild(lineBreak);
+      return;
+    }
+
+    const tokens = (node.textContent || "").replace(/\s+/g, " ").match(/\S+\s*/g) || [];
+    tokens.forEach((token) => {
+      target.appendChild(createSplitWord(token));
+    });
   });
-});
 
-const splitNodes = document.querySelectorAll(".split-char");
+  const rawNodes = Array.from(target.childNodes);
+  const lines = [];
+  let currentLine = [];
+  let currentTop = null;
+
+  rawNodes.forEach((node) => {
+    if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === "BR") {
+      if (currentLine.length) lines.push(currentLine);
+      currentLine = [];
+      currentTop = null;
+      node.remove();
+      return;
+    }
+
+    if (!(node instanceof HTMLElement)) return;
+
+    if (currentTop === null) {
+      currentTop = node.offsetTop;
+      currentLine = [node];
+      return;
+    }
+
+    if (Math.abs(node.offsetTop - currentTop) > 4) {
+      lines.push(currentLine);
+      currentLine = [node];
+      currentTop = node.offsetTop;
+      return;
+    }
+
+    currentLine.push(node);
+  });
+
+  if (currentLine.length) {
+    lines.push(currentLine);
+  }
+
+  target.innerHTML = "";
+
+  lines.forEach((lineNodes, index) => {
+    const line = document.createElement("span");
+    line.className = "split-line";
+    line.setAttribute("aria-hidden", "true");
+
+    const inner = document.createElement("span");
+    inner.className = "split-line-inner";
+    inner.style.transitionDelay = `${index * 120}ms`;
+
+    if (wasVisible) {
+      inner.classList.add("is-visible");
+    }
+
+    lineNodes.forEach((lineNode) => {
+      inner.appendChild(lineNode);
+    });
+
+    line.appendChild(inner);
+    target.appendChild(line);
+  });
+};
+
+const rebuildSplitText = () => {
+  splitTextNodes.forEach((target) => buildSplitText(target));
+};
+
+rebuildSplitText();
+
+if (document.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    rebuildSplitText();
+  });
+}
+
+let splitResizeTimer = null;
+window.addEventListener("resize", () => {
+  if (splitResizeTimer) window.clearTimeout(splitResizeTimer);
+  splitResizeTimer = window.setTimeout(() => {
+    rebuildSplitText();
+  }, 140);
+});
 
 if (
   shouldRevealImmediately ||
   typeof IntersectionObserver === "undefined"
 ) {
   revealNodes.forEach((node) => node.classList.add("visible"));
-  splitNodes.forEach((node) => node.classList.add("visible"));
+  splitTextNodes.forEach((node) => node.classList.add("visible"));
   if (contactSection) contactSection.classList.add("is-unveiled");
 } else {
   const revealObserver = new IntersectionObserver(
@@ -208,7 +326,7 @@ if (
   );
 
   revealNodes.forEach((node) => revealObserver.observe(node));
-  splitNodes.forEach((node) => splitObserver.observe(node));
+  splitTextNodes.forEach((node) => splitObserver.observe(node));
 
   if (contactSection) {
     const contactObserver = new IntersectionObserver(
