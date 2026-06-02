@@ -1,0 +1,126 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бриф на разработку сайта</title>
+    <meta name="description" content="Онлайн-бриф на разработку сайта. Ответьте на несколько шагов и отправьте заявку." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./brief.css" />
+  </head>
+  <body>
+    <main class="brief-quiz">
+      <header class="quiz-head">
+        <a class="quiz-back-home" href="../index.html">На главную</a>
+        <p class="quiz-kicker">Бриф на разработку</p>
+        <h1>Расскажите о проекте в формате короткого квиза</h1>
+      </header>
+
+      <section class="quiz-card" aria-live="polite">
+        <div class="quiz-progress-meta">
+          <p id="quiz-step-label">Шаг 1 из 8</p>
+          <p id="quiz-step-title">Контакты</p>
+        </div>
+        <div class="quiz-progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" aria-label="Прогресс заполнения брифа">
+          <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+        </div>
+
+        <form id="brief-quiz-form" novalidate>
+          <fieldset class="quiz-step is-active" data-step="1" data-title="Контакты">
+            <label>Ваше имя<input name="name" autocomplete="name" required placeholder="Например, Анна" /></label>
+            <label>Telegram или WhatsApp<input name="messenger" required placeholder="@username или номер" /></label>
+            <label>Email<input name="email" type="email" autocomplete="email" required placeholder="name@example.com" /></label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="2" data-title="Тип проекта">
+            <p class="step-hint">Выберите формат, который нужен сейчас.</p>
+            <label><input type="radio" name="projectType" value="Лендинг" required />Лендинг</label>
+            <label><input type="radio" name="projectType" value="Корпоративный сайт" />Корпоративный сайт</label>
+            <label><input type="radio" name="projectType" value="Интернет-магазин" />Интернет-магазин</label>
+            <label><input type="radio" name="projectType" value="Презентация" />Презентация</label>
+            <label><input type="radio" name="projectType" value="Другое" />Другое</label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="3" data-title="Описание бизнеса">
+            <label>Чем занимаетесь?<textarea name="business" required placeholder="Коротко: ниша, аудитория, продукт, география"></textarea></label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="4" data-title="Стиль сайта">
+            <p class="step-hint">Можно выбрать несколько направлений.</p>
+            <label><input type="checkbox" name="style" value="Минимализм" />Минимализм</label>
+            <label><input type="checkbox" name="style" value="Премиум" />Премиум</label>
+            <label><input type="checkbox" name="style" value="Технологичный" />Технологичный</label>
+            <label><input type="checkbox" name="style" value="Яркий креативный" />Яркий креативный</label>
+            <label><input type="checkbox" name="style" value="Спокойный классический" />Спокойный классический</label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="5" data-title="Нужные функции">
+            <p class="step-hint">Отметьте всё, что важно для запуска.</p>
+            <label><input type="checkbox" name="features" value="Форма заявки" />Форма заявки</label>
+            <label><input type="checkbox" name="features" value="Каталог" />Каталог товаров/услуг</label>
+            <label><input type="checkbox" name="features" value="Блог" />Блог/новости</label>
+            <label><input type="checkbox" name="features" value="Анимации" />Анимации и motion</label>
+            <label><input type="checkbox" name="features" value="Интеграции" />Интеграции (CRM, мессенджеры, аналитика)</label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="6" data-title="Бюджет">
+            <label><input type="radio" name="budget" value="До 50 000 ₽" required />До 50 000 ₽</label>
+            <label><input type="radio" name="budget" value="50 000 – 100 000 ₽" />50 000 – 100 000 ₽</label>
+            <label><input type="radio" name="budget" value="100 000 – 200 000 ₽" />100 000 – 200 000 ₽</label>
+            <label><input type="radio" name="budget" value="200 000 ₽+" />200 000 ₽+</label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="7" data-title="Сроки">
+            <label><input type="radio" name="deadline" value="Очень срочно (до 1 недели)" required />Очень срочно (до 1 недели)</label>
+            <label><input type="radio" name="deadline" value="2–3 недели" />2–3 недели</label>
+            <label><input type="radio" name="deadline" value="1–2 месяца" />1–2 месяца</label>
+            <label><input type="radio" name="deadline" value="Гибко, без жёсткого дедлайна" />Гибко, без жёсткого дедлайна</label>
+          </fieldset>
+
+          <fieldset class="quiz-step" data-step="8" data-title="Комментарий">
+            <label>Дополнительные детали<textarea name="comment" placeholder="Ссылки на референсы, пожелания, ограничения"></textarea></label>
+          </fieldset>
+
+          <div class="quiz-consent">
+            <label class="quiz-consent-label">
+              <input
+                type="checkbox"
+                id="quiz-consent"
+                name="consent"
+                required
+                aria-describedby="quiz-consent-error"
+              />
+              <span>
+                Я <a href="../personal-data-consent/">согласен на обработку персональных данных</a> и
+                ознакомлен с <a href="../privacy/">Политикой обработки персональных данных</a>.
+              </span>
+            </label>
+            <p class="quiz-consent-error" id="quiz-consent-error" hidden aria-live="polite">
+              Чтобы отправить заявку, необходимо согласие на обработку персональных данных.
+            </p>
+          </div>
+
+          <div class="quiz-actions">
+            <button type="button" id="quiz-prev" class="quiz-btn secondary">Назад</button>
+            <button type="button" id="quiz-next" class="quiz-btn primary">Далее</button>
+            <button type="submit" id="quiz-submit" class="quiz-btn primary">Отправить заявку</button>
+          </div>
+        </form>
+
+        <section class="quiz-success" id="quiz-success" hidden>
+          <p class="quiz-success-tag">Готово</p>
+          <h2>Спасибо, заявка отправлена</h2>
+          <p>Я получил ваши ответы и свяжусь с вами в ближайшее время.</p>
+          <a class="quiz-btn secondary" href="../index.html">Вернуться на главную</a>
+        </section>
+      </section>
+    </main>
+
+    <script src="./brief.js"></script>
+  </body>
+</html>

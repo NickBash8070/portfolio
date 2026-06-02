@@ -1,119 +1,400 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio | Your Name</title>
+    <meta name="theme-color" content="#0a0908" />
+    <title>Николай Башкирев — фриланс-разработка сайтов для бизнеса</title>
     <meta
       name="description"
-      content="Персональный сайт-портфолио: проекты, навыки и контакты."
+      content="Портфолио фрилансера Николая Башкирева: дизайн, веб-кодинг и запуск сайтов для бизнеса в Новосибирске."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260602-1" />
   </head>
   <body>
-    <div class="bg-orb orb-a"></div>
-    <div class="bg-orb orb-b"></div>
+    <a class="skip-link" href="#main-content">Перейти к содержанию</a>
 
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a class="brand" href="#home">PORTFOLIO</a>
-        <nav>
+    <main id="main-content">
+      <section class="hero" id="home">
+        <div class="hero-noise" aria-hidden="true"></div>
+        <div class="hero-waves" aria-hidden="true"></div>
+
+        <div class="hero-top">
+          <nav class="hero-nav" aria-label="Главная навигация">
+            <a href="#home">Главная</a>
+            <a href="#about">Обо мне</a>
+            <a href="#work">Кейсы</a>
+            <a href="#packages">Цены</a>
+            <a href="#contact">Контакты</a>
+          </nav>
+
+          <p class="hero-brand">© Николай Башкирев</p>
+
+          <a class="hero-talk" href="#contact">Обсудить проект</a>
+
+          <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+            Меню
+          </button>
+        </div>
+
+        <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+          <button class="menu-close" id="menu-close" type="button" aria-label="Закрыть меню">Закрыть</button>
+          <a href="#home">Главная</a>
           <a href="#about">Обо мне</a>
-          <a href="#projects">Проекты</a>
+          <a href="#method">Процесс</a>
+          <a href="#work">Кейсы</a>
+          <a href="#packages">Цены</a>
+          <a href="#brief">Бриф</a>
           <a href="#contact">Контакты</a>
-        </nav>
-      </div>
-    </header>
+        </aside>
 
-    <main id="home">
-      <section class="hero container reveal">
-        <p class="eyebrow">WEB DEVELOPER / DESIGN-MINDED</p>
-        <h1>Создаю быстрые и выразительные сайты для реальных задач.</h1>
-        <p class="lead">
-          Помогаю запускать проекты аккуратно: от идеи и структуры до готового
-          продакшн-деплоя.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">Смотреть проекты</a>
-          <a class="btn btn-ghost" href="#contact">Связаться</a>
+        <div class="hero-mid reveal">
+          <h2 class="hero-note">Помогаю бизнесу выглядеть сильнее: сайты, презентации и визуальная подача под продажи.</h2>
         </div>
-        <ul class="metrics">
-          <li><strong>12+</strong><span>запущенных сайтов</span></li>
-          <li><strong>98/100</strong><span>средний Lighthouse</span></li>
-          <li><strong>4 года</strong><span>коммерческого опыта</span></li>
-        </ul>
-      </section>
 
-      <section class="container about reveal" id="about">
-        <h2>Обо мне</h2>
-        <p>
-          Я разрабатываю интерфейсы с упором на читаемость, скорость и чистую
-          архитектуру. Люблю превращать сложные процессы в понятные экраны и
-          предсказуемый пользовательский опыт.
-        </p>
-        <div class="tags">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>JavaScript</span>
-          <span>React</span>
-          <span>Next.js</span>
-          <span>Vercel</span>
+        <div class="hero-bottom reveal">
+          <div class="hero-meta">
+            <span>Новосибирск</span>
+            <span>Обновлено в <span id="hero-time" aria-label="Текущее время">20:30</span></span>
+          </div>
         </div>
       </section>
 
-      <section class="container reveal" id="projects">
-        <div class="section-head">
-          <h2>Избранные проекты</h2>
-          <p>Небольшая подборка последних работ.</p>
+      <section class="partners reveal" aria-label="Навыки">
+        <div class="partners-track" aria-label="Навыки">
+          <div class="partners-row">
+            <span>WEBFLOW</span>
+            <span>FIGMA</span>
+            <span>CODEX</span>
+            <span>GPT</span>
+            <span>ADOBE ILLUSTRATOR</span>
+            <span>PHOTOSHOP</span>
+            <span>3DS MAX</span>
+            <span>WEBFLOW</span>
+            <span>FIGMA</span>
+            <span>CODEX</span>
+            <span>GPT</span>
+            <span>ADOBE ILLUSTRATOR</span>
+            <span>PHOTOSHOP</span>
+            <span>3DS MAX</span>
+          </div>
+          <div class="partners-row" aria-hidden="true">
+            <span>WEBFLOW</span>
+            <span>FIGMA</span>
+            <span>CODEX</span>
+            <span>GPT</span>
+            <span>ADOBE ILLUSTRATOR</span>
+            <span>PHOTOSHOP</span>
+            <span>3DS MAX</span>
+            <span>WEBFLOW</span>
+            <span>FIGMA</span>
+            <span>CODEX</span>
+            <span>GPT</span>
+            <span>ADOBE ILLUSTRATOR</span>
+            <span>PHOTOSHOP</span>
+            <span>3DS MAX</span>
+          </div>
         </div>
-        <div class="project-grid">
-          <article class="card">
-            <h3>Landing для онлайн-курса</h3>
-            <p>
-              Рост конверсии на 34% после редизайна структуры, акцентов и форм
-              захвата.
+      </section>
+
+      <section class="about section" id="about">
+        <div class="wrap">
+          <p class="section-tag reveal">КТО Я</p>
+          <h2 class="about-title reveal">
+            Делаю сайты с сильной подачей, которые вызывают доверие и ведут к заявке.
+          </h2>
+          <div class="about-side reveal">
+            <span class="about-accent" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="presentation" focusable="false">
+                <circle cx="24" cy="24" r="17.5"></circle>
+                <circle cx="18.5" cy="20" r="2.25"></circle>
+                <circle cx="29.5" cy="20" r="2.25"></circle>
+                <path d="M16.5 28.5c2.2 3 4.7 4.5 7.5 4.5s5.3-1.5 7.5-4.5"></path>
+              </svg>
+            </span>
+            <p class="about-text">
+              Работаю в формате дизайн + веб-кодинг, поэтому финальный сайт не теряет качество между идеей и запуском.
             </p>
-            <a href="#" aria-label="Открыть проект 1">Посмотреть кейс</a>
-          </article>
-          <article class="card">
-            <h3>Портал внутренней аналитики</h3>
-            <p>
-              Собрал рабочий интерфейс с фильтрами, графиками и адаптацией под
-              мобильные устройства.
-            </p>
-            <a href="#" aria-label="Открыть проект 2">Посмотреть кейс</a>
-          </article>
-          <article class="card">
-            <h3>Магазин цифровых продуктов</h3>
-            <p>
-              Оптимизировал каталог и checkout, что сократило время покупки на
-              27%.
-            </p>
-            <a href="#" aria-label="Открыть проект 3">Посмотреть кейс</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="method section" id="method">
+        <div class="wrap">
+          <div class="method-head reveal">
+            <p class="section-tag">ПРОЦЕСС</p>
+          </div>
+          <div class="method-grid">
+            <article class="method-item reveal">
+              <span class="method-glyph method-glyph-strategy" aria-hidden="true">
+                <img src="./images/icon button.png" alt="" role="presentation" />
+              </span>
+              <h3>Стратегия</h3>
+              <p class="method-copy">Анализ цели, оффера, структуры и сценария конверсии. Собираю логику подачи так, чтобы сайт уверенно вел к заявке.</p>
+            </article>
+            <article class="method-item reveal">
+              <span class="method-glyph method-glyph-code" aria-hidden="true">
+                <img src="./images/icon button.png" alt="" role="presentation" />
+              </span>
+              <h3>Дизайн и код</h3>
+              <p class="method-copy">Дизайн и вёрстка как один процесс: визуал сразу становится рабочим интерфейсом.</p>
+            </article>
+            <article class="method-item reveal">
+              <span class="method-glyph method-glyph-launch" aria-hidden="true">
+                <img src="./images/icon button.png" alt="" role="presentation" />
+              </span>
+              <h3>Запуск</h3>
+              <p class="method-copy">Тестирую, запускаю и передаю сайт с понятной системой дальнейшего роста.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="work section" id="work">
+        <div class="wrap">
+          <div class="work-head reveal">
+            <p class="section-tag">КЕЙСЫ</p>
+            <h2>Реализованные<br />проекты</h2>
+          </div>
+
+          <div class="work-switch reveal" role="tablist" aria-label="Сегменты кейсов">
+            <button class="work-switch-btn is-active" type="button" data-case-filter="all" aria-pressed="true">Все</button>
+            <button class="work-switch-btn" type="button" data-case-filter="start" aria-pressed="false">Старт</button>
+            <button class="work-switch-btn" type="button" data-case-filter="business" aria-pressed="false">Бизнес</button>
+            <button class="work-switch-btn" type="button" data-case-filter="premium" aria-pressed="false">Премиум</button>
+            <button class="work-switch-btn" type="button" data-case-filter="presentation" aria-pressed="false">Презентации</button>
+          </div>
+
+          <div class="work-grid">
+            <a class="work-card reveal" data-case-tier="start" href="./case-live/atelier.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-a" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Ателье</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="start" href="./case-live/forms.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-b" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Формы</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="business" href="./case-live/labs.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-c" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Лаборатория</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="premium" href="./case-live/atelier.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-d" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Пульс</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="business" href="./case-live/forms.html" target="_blank" rel="noreferrer noopener">
+              <video
+                class="work-video"
+                aria-hidden="true"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="./images/a4c39f9bdd8bd1e51b3968676a46a5d8.webp"
+              >
+                <source src="./images/original-fbb2fccf632ae2b47d9ee4b656a8ff39.mp4" type="video/mp4" />
+              </video>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Нексус</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="presentation" href="./case-live/labs.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-e" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Сфера</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="premium" href="./case-live/atelier.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-f" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Призма</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="presentation" href="./case-live/forms.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-g" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Студия</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+
+            <a class="work-card reveal" data-case-tier="start" href="./case-live/labs.html" target="_blank" rel="noreferrer noopener">
+              <div class="work-image image-h" aria-hidden="true"></div>
+              <div class="work-copy" aria-hidden="true">
+                <div>
+                  <h3>Эфир</h3>
+                </div>
+                <span class="work-arrow">Посмотреть проект</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="packages section" id="packages">
+        <div class="wrap">
+          <div class="packages-head packages-intro reveal">
+            <p class="section-tag">ЦЕНЫ</p>
+            <h2>Выберите формат</h2>
+          </div>
+
+          <div class="packages-stack packages-grid">
+            <article class="package package-start reveal">
+              <div class="package-meta">
+                <h3>Лендинг Старт</h3>
+                <div class="package-flags">
+                  <p class="package-term">3–5 раб. дней</p>
+                  <p class="package-payment">Оплата по этапам</p>
+                </div>
+              </div>
+              <div class="package-price-col">
+                <p class="package-price">от 25 000 ₽</p>
+                <a class="package-cta" href="#contact">Обсудить проект</a>
+              </div>
+              <p class="package-desc">Одностраничный сайт для услуги, эксперта, события или небольшого бизнеса: структура, дизайн, адаптивная вёрстка, форма заявки и базовый запуск.</p>
+            </article>
+
+            <article class="package reveal">
+              <div class="package-meta">
+                <h3>Бренд Про</h3>
+                <div class="package-flags">
+                  <p class="package-term">14–21 раб. день</p>
+                  <p class="package-payment">Оплата по этапам</p>
+                </div>
+              </div>
+              <div class="package-price-col">
+                <p class="package-price">от 65 000 ₽</p>
+                <a class="package-cta" href="#contact">Обсудить проект</a>
+              </div>
+              <p class="package-desc">Премиальный формат: индивидуальная визуальная система, моушн-акценты и сложная бренд-подача.</p>
+            </article>
+
+            <article class="package reveal">
+              <div class="package-meta">
+                <h3>Интернет-магазин</h3>
+                <div class="package-flags">
+                  <p class="package-term">14–30 раб. дней</p>
+                  <p class="package-payment">Оплата по этапам</p>
+                </div>
+              </div>
+              <div class="package-price-col">
+                <p class="package-price">от 95 000 ₽</p>
+                <a class="package-cta" href="#contact">Обсудить проект</a>
+              </div>
+              <p class="package-desc">Каталог, карточки товаров, корзина, форма заказа и адаптивная версия. Финальная стоимость зависит от объёма каталога и нужного функционала.</p>
+            </article>
+          </div>
+
+          <div class="packages-duo">
+            <article class="package package-presentation reveal">
+              <div class="package-meta">
+                <h3>Презентация</h3>
+                <div class="package-flags">
+                  <p class="package-term">1–3 раб. дня</p>
+                </div>
+              </div>
+              <div class="package-price-col">
+                <p class="package-price">от 15 000 ₽</p>
+                <a class="package-cta" href="#contact">Обсудить проект</a>
+              </div>
+              <p class="package-desc">Продающая презентация: структура, визуальная подача, оформление слайдов, единый стиль, сильные акценты и понятный порядок подачи.</p>
+            </article>
+
+            <article class="package package-support reveal">
+              <div class="package-meta">
+                <h3>Техподдержка сайта</h3>
+                <div class="package-flags">
+                  <p class="package-term">ежемесячно</p>
+                </div>
+              </div>
+              <div class="package-price-col">
+                <p class="package-price">от 3 000 ₽</p>
+                <a class="package-cta" href="#contact">Обсудить проект</a>
+              </div>
+              <p class="package-desc">Поддержка после запуска: мелкие правки, обновление контента, контроль корректной работы форм и консультации по развитию сайта.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="contact-overlay" aria-hidden="true"></div>
+        <div class="contact-noise" aria-hidden="true"></div>
+        <div class="wrap contact-row contact-reveal">
+          <article class="contact-block" id="brief">
+            <div class="brief-layout">
+              <div class="brief-main">
+                <p class="section-tag">БРИФ</p>
+                <h2>Короткий бриф за 5 минут и понятная смета в течение дня</h2>
+                <p class="contact-sub">Нужно заполнить только базовые критерии. Без сложных формулировок и длинных анкет.</p>
+              </div>
+              <div class="brief-side">
+                <p class="brief-flow">Заполненный бриф сразу поступает в работу. После этого я отправляю структуру и смету в течение дня.</p>
+                <div class="brief-actions">
+                  <a href="./brief/" target="_blank" rel="noreferrer noopener">Заполнить короткий бриф</a>
+                </div>
+              </div>
+            </div>
           </article>
         </div>
       </section>
 
-      <section class="container contact reveal" id="contact">
-        <h2>Давайте обсудим ваш проект</h2>
-        <p>
-          Пишите на почту:
-          <a href="mailto:hello@example.com">hello@example.com</a>
-        </p>
-      </section>
+      <footer class="footer" id="site-footer">
+        <div class="wrap footer-divider" aria-hidden="true"></div>
+
+        <div class="wrap footer-bottom">
+          <p>© 2026 Николай Башкирев</p>
+          <a href="./privacy/">Политика обработки персональных данных</a>
+          <a href="./personal-data-consent/">Согласие на обработку персональных данных</a>
+          <a href="./terms/">Условия оказания услуг</a>
+        </div>
+      </footer>
     </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>© <span id="year"></span> Your Name. All rights reserved.</p>
-      </div>
-    </footer>
 
     <script src="./script.js"></script>
   </body>

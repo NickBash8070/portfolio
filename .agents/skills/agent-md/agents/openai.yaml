@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent MD"
+  short_description: "Continue the Portfolio site with its premium visual system intact"
+  default_prompt: "Use this skill when working on the Portfolio website, recover the current state first, preserve the editorial premium direction, and read the font reference before changing typography."

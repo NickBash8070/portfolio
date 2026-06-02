@@ -1,0 +1,300 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Онлайн-бриф на сайт</title>
+    <style>
+      :root {
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 24px;
+        --space-6: 32px;
+        --space-7: 48px;
+        --space-8: 64px;
+
+        --radius-sm: 12px;
+        --radius-md: 16px;
+        --radius-pill: 999px;
+
+        --bg: #070707;
+        --panel: #111111;
+        --line: rgba(255, 255, 255, 0.14);
+        --text: #f2f2ee;
+        --muted: #a6a69f;
+        --accent: #22b57d;
+
+        --container-max: 980px;
+        --gutter: clamp(var(--space-4), 4vw, var(--space-8));
+
+        --fs-xs: 12px;
+        --fs-sm: 14px;
+        --fs-body: 16px;
+        --fs-h1: clamp(36px, 7vw, 76px);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Manrope", sans-serif;
+        line-height: 1.5;
+      }
+
+      .wrap {
+        width: min(var(--container-max), 100%);
+        margin: var(--space-7) auto;
+        padding-inline: var(--gutter);
+      }
+
+      h1 {
+        margin: 0 0 var(--space-3);
+        font: 600 var(--fs-h1) / 0.92 "Cormorant Garamond", serif;
+        letter-spacing: -0.04em;
+      }
+
+      p {
+        margin: 0 0 var(--space-5);
+        color: var(--muted);
+        font-size: var(--fs-body);
+      }
+
+      form {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        padding: var(--space-5);
+        display: grid;
+        gap: var(--space-3);
+        background: var(--panel);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+      }
+
+      label {
+        display: grid;
+        gap: var(--space-2);
+        color: #d0d0c8;
+        font-size: var(--fs-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: #0b0b0b;
+        color: var(--text);
+        padding: var(--space-3) var(--space-4);
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 128px;
+        resize: vertical;
+      }
+
+      .full {
+        grid-column: 1 / -1;
+      }
+
+      .actions {
+        display: flex;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+
+      .consent {
+        margin-top: var(--space-3);
+        padding: var(--space-4);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.04);
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: var(--space-3);
+        align-items: start;
+        color: #d0d0c8;
+        font-size: var(--fs-sm);
+        line-height: 1.5;
+      }
+
+      .consent input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-top: 3px;
+        accent-color: var(--accent);
+      }
+
+      .consent a {
+        display: inline;
+        min-height: 0;
+        padding: 0;
+        border: 0;
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      button,
+      a {
+        min-height: 48px;
+        border-radius: var(--radius-pill);
+        padding: 0 var(--space-4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: var(--fs-xs);
+        font-weight: 700;
+      }
+
+      button {
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #062117;
+        cursor: pointer;
+      }
+
+      a {
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+
+      @media (max-width: 1024px) {
+        .wrap {
+          margin-block: var(--space-6);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        form {
+          padding: var(--space-4);
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        button,
+        a {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        :root {
+          --gutter: var(--space-4);
+        }
+
+        h1 {
+          margin-bottom: var(--space-2);
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 390px) {
+        form {
+          padding: var(--space-3);
+        }
+
+        .consent {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 360px) {
+        h1 {
+          font-size: clamp(30px, 10vw, 42px);
+        }
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Онлайн-бриф на сайт</h1>
+      <p>Заполните форму, и я вернусь с оценкой сроков и стоимости в течение рабочего дня.</p>
+      <form action="mailto:nikbash@portfolio.dev" method="post" enctype="text/plain">
+        <div class="grid">
+          <label>
+            Ваше имя
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" spellcheck="false" required />
+          </label>
+          <label>
+            Тип сайта
+            <select name="site_type" required>
+              <option value="">Выберите вариант</option>
+              <option>Лендинг</option>
+              <option>Бизнес-страница</option>
+              <option>Многостраничный сайт</option>
+            </select>
+          </label>
+          <label>
+            Желаемый срок
+            <input type="text" name="deadline" placeholder="Например: 8–12 дней…" />
+          </label>
+        </div>
+
+        <label class="full">
+          Что должен сделать сайт
+          <textarea name="goals" required></textarea>
+        </label>
+        <label class="full">
+          Нужные блоки и функции
+          <textarea name="structure"></textarea>
+        </label>
+        <label class="full">
+          Референсы / стиль
+          <textarea name="references"></textarea>
+        </label>
+
+        <label class="consent">
+          <input type="checkbox" name="consent" required />
+          <span>
+            Я <a href="../personal-data-consent/">согласен на обработку персональных данных</a> и
+            ознакомлен с <a href="../privacy/">Политикой обработки персональных данных</a>.
+          </span>
+        </label>
+
+        <div class="actions">
+          <button type="submit">Отправить бриф</button>
+          <a href="../index.html#brief">Назад на сайт</a>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
