@@ -167,6 +167,39 @@ const aboutStatsSection = document.querySelector(".about-stats");
 const aboutStatNumbers = Array.from(document.querySelectorAll(".about-stat-number"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const shouldRevealImmediately = prefersReducedMotion || Boolean(window.location.hash);
+const splitGlueWords = new Set([
+  "а",
+  "и",
+  "но",
+  "да",
+  "или",
+  "либо",
+  "в",
+  "во",
+  "на",
+  "по",
+  "к",
+  "ко",
+  "с",
+  "со",
+  "у",
+  "о",
+  "об",
+  "обо",
+  "от",
+  "до",
+  "из",
+  "изо",
+  "за",
+  "не",
+  "ни",
+  "под",
+  "над",
+  "при",
+  "без",
+  "для",
+  "про",
+]);
 
 const formatAboutStatValue = (node, value) => {
   const roundedValue = Math.round(value);
@@ -241,7 +274,7 @@ const buildSplitText = (target) => {
 
   template.content.childNodes.forEach((node) => {
     if (node.nodeType === Node.TEXT_NODE) {
-      const tokens = (node.textContent || "").replace(/\s+/g, " ").match(/\S+\s*/g) || [];
+      const tokens = (node.textContent || "").match(/\S+\s*/g) || [];
       tokens.forEach((token) => {
         target.appendChild(createSplitWord(token));
       });
@@ -256,7 +289,7 @@ const buildSplitText = (target) => {
       return;
     }
 
-    const tokens = (node.textContent || "").replace(/\s+/g, " ").match(/\S+\s*/g) || [];
+    const tokens = (node.textContent || "").match(/\S+\s*/g) || [];
     tokens.forEach((token) => {
       target.appendChild(createSplitWord(token));
     });
