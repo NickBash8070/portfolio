@@ -11,6 +11,7 @@ const successBlock = document.getElementById("quiz-success");
 const consentInput = document.getElementById("quiz-consent");
 const consentError = document.getElementById("quiz-consent-error");
 const quizCard = document.querySelector(".quiz-card");
+const quizRoot = document.querySelector(".brief-quiz");
 const choiceLabels = Array.from(document.querySelectorAll(".quiz-choice"));
 const brandFileInput = document.getElementById("quiz-brand-file");
 const brandFileName = document.getElementById("quiz-brand-file-name");
@@ -292,15 +293,37 @@ const focusCurrentStep = () => {
   });
 };
 
+const clearActiveFocus = () => {
+  const activeElement = document.activeElement;
+  if (!(activeElement instanceof HTMLElement)) return;
+  if (activeElement === document.body) return;
+  activeElement.blur();
+};
+
+const getQuizTop = () => {
+  if (!quizRoot) return 0;
+  return Math.max(0, window.scrollY + quizRoot.getBoundingClientRect().top);
+};
+
 const scrollCardIntoView = () => {
-  if (!quizCard) return;
-  quizCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!quizRoot) return;
+  const targetTop = getQuizTop();
+
+  window.requestAnimationFrame(() => {
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
+  });
+
+  window.setTimeout(() => {
+    window.scrollTo({ top: getQuizTop(), behavior: "auto" });
+  }, 280);
 };
 
 const updateUI = ({ shouldFocus = false, shouldScroll = false } = {}) => {
   steps.forEach((step, index) => {
     step.classList.toggle("is-active", index === currentStep);
   });
+
+  quizRoot?.classList.toggle("is-followup-step", currentStep > 0);
 
   const progress = ((currentStep + 1) / totalSteps) * 100;
   progressFill.style.width = `${progress}%`;
@@ -327,6 +350,7 @@ const resetQuizState = () => {
 };
 
 const goToStep = (nextStep) => {
+  clearActiveFocus();
   currentStep = Math.min(Math.max(nextStep, 0), totalSteps - 1);
   updateUI({ shouldFocus: true, shouldScroll: true });
 };

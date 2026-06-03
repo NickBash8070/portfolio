@@ -163,8 +163,55 @@ window.addEventListener("keydown", (event) => {
 
 const revealNodes = document.querySelectorAll(".reveal");
 const splitTextNodes = Array.from(document.querySelectorAll(".split-text"));
+const aboutStatsSection = document.querySelector(".about-stats");
+const aboutStatNumbers = Array.from(document.querySelectorAll(".about-stat-number"));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const shouldRevealImmediately = prefersReducedMotion || Boolean(window.location.hash);
+
+const formatAboutStatValue = (node, value) => {
+  const roundedValue = Math.round(value);
+  const suffix = node.dataset.suffix || "";
+  return `${new Intl.NumberFormat("ru-RU").format(roundedValue)}${suffix}`;
+};
+
+const setAboutStatValue = (node, value) => {
+  node.textContent = formatAboutStatValue(node, value);
+};
+
+const animateAboutStat = (node) => {
+  if (!node || node.dataset.counted === "true") return;
+
+  const target = Number(node.dataset.countTo || "0");
+  const duration = Number(node.dataset.duration || "1400");
+  node.dataset.counted = "true";
+
+  if (prefersReducedMotion || target <= 0) {
+    setAboutStatValue(node, target);
+    return;
+  }
+
+  const startTime = performance.now();
+  const easeOutCubic = (progress) => 1 - (1 - progress) ** 3;
+
+  const tick = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const nextValue = target * easeOutCubic(progress);
+    setAboutStatValue(node, nextValue);
+
+    if (progress < 1) {
+      window.requestAnimationFrame(tick);
+      return;
+    }
+
+    setAboutStatValue(node, target);
+  };
+
+  window.requestAnimationFrame(tick);
+};
+
+const startAboutStatsAnimation = () => {
+  aboutStatNumbers.forEach((node) => animateAboutStat(node));
+};
 
 const createSplitWord = (token) => {
   const word = document.createElement("span");
@@ -302,6 +349,7 @@ if (
   revealNodes.forEach((node) => node.classList.add("visible"));
   splitTextNodes.forEach((node) => node.classList.add("visible"));
   if (contactSection) contactSection.classList.add("is-unveiled");
+  startAboutStatsAnimation();
 } else {
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
@@ -341,5 +389,20 @@ if (
     );
 
     contactObserver.observe(contactSection);
+  }
+
+  if (aboutStatsSection && aboutStatNumbers.length) {
+    const aboutStatsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          startAboutStatsAnimation();
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    aboutStatsObserver.observe(aboutStatsSection);
   }
 }

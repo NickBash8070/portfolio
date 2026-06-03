@@ -149,6 +149,14 @@ textarea:focus-visible {
   text-transform: none;
 }
 
+.brief-quiz.is-followup-step .quiz-head {
+  gap: var(--space-3);
+}
+
+.brief-quiz.is-followup-step .quiz-head h1 {
+  display: none;
+}
+
 .quiz-card {
   width: min(var(--quiz-max), 100%);
   margin-inline: auto;
@@ -370,8 +378,9 @@ textarea:focus-visible {
 .quiz-choice-meta {
   color: var(--ink-soft);
   font-size: var(--fs-1);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  line-height: 1.35;
 }
 
 .quiz-choice:last-child {
