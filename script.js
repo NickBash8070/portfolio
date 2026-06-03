@@ -7,8 +7,37 @@ const caseArrows = document.querySelectorAll(".work-arrow");
 const workSwitchButtons = document.querySelectorAll(".work-switch-btn");
 const contactSection = document.getElementById("contact");
 const siteFooter = document.getElementById("site-footer");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const shouldRevealImmediately = prefersReducedMotion || Boolean(window.location.hash);
 
 let lastFocusedElement = null;
+
+const getHeaderOffset = () => {
+  const rawOffset = getComputedStyle(document.documentElement).getPropertyValue("--header-offset");
+  return Number.parseFloat(rawOffset) || 0;
+};
+
+const lenis =
+  !prefersReducedMotion && typeof window.Lenis !== "undefined"
+    ? new window.Lenis({
+        duration: 1.05,
+        lerp: 0.09,
+        smoothWheel: true,
+        wheelMultiplier: 0.95,
+        touchMultiplier: 1,
+        syncTouch: false,
+        autoRaf: false,
+      })
+    : null;
+
+if (lenis) {
+  const lenisRaf = (time) => {
+    lenis.raf(time);
+    window.requestAnimationFrame(lenisRaf);
+  };
+
+  window.requestAnimationFrame(lenisRaf);
+}
 
 const syncMobileMenuActiveState = () => {
   const currentHash = window.location.hash || "#home";
@@ -16,6 +45,26 @@ const syncMobileMenuActiveState = () => {
     const href = link.getAttribute("href");
     link.classList.toggle("is-active", href === currentHash);
   });
+};
+
+const scrollToAnchorTarget = (target, { updateHash = true, immediate = false } = {}) => {
+  if (!(target instanceof HTMLElement)) return;
+
+  const offset = -getHeaderOffset();
+
+  if (lenis) {
+    lenis.scrollTo(target, { offset, immediate });
+  } else {
+    const top = target.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
+  }
+
+  if (updateHash && target.id) {
+    const nextHash = `#${target.id}`;
+    if (window.location.hash !== nextHash) {
+      history.pushState(null, "", nextHash);
+    }
+  }
 };
 
 const markSiteReady = () => {
@@ -42,6 +91,13 @@ const setMenuState = (isOpen) => {
 
   if (menuButton) menuButton.setAttribute("aria-expanded", String(isOpen));
   if (mobileMenu) mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+  if (lenis) {
+    if (isOpen) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }
 
   if (isOpen) {
     syncMobileMenuActiveState();
@@ -64,15 +120,44 @@ if (menuButton) {
 if (menuClose) menuClose.addEventListener("click", () => setMenuState(false));
 
 menuLinks.forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (event) => {
     const href = link.getAttribute("href");
+    const target = href ? document.querySelector(href) : null;
+
+    if (target instanceof HTMLElement) {
+      event.preventDefault();
+    }
+
     menuLinks.forEach((node) => {
       node.classList.toggle("is-active", node === link);
     });
     setMenuState(false);
-    if (href) {
-      window.setTimeout(syncMobileMenuActiveState, 120);
+
+    if (target instanceof HTMLElement) {
+      window.setTimeout(() => {
+        scrollToAnchorTarget(target);
+        syncMobileMenuActiveState();
+      }, 80);
+      return;
     }
+
+    if (href) window.setTimeout(syncMobileMenuActiveState, 120);
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  if (link.closest(".mobile-menu")) return;
+
+  link.addEventListener("click", (event) => {
+    const href = link.getAttribute("href");
+    if (!href || href === "#") return;
+
+    const target = document.querySelector(href);
+    if (!(target instanceof HTMLElement)) return;
+
+    event.preventDefault();
+    scrollToAnchorTarget(target);
+    syncMobileMenuActiveState();
   });
 });
 
@@ -133,6 +218,25 @@ window.addEventListener("scroll", () => {
 document.body.classList.toggle("header-scrolled", window.scrollY > 12);
 syncMobileMenuActiveState();
 window.addEventListener("hashchange", syncMobileMenuActiveState);
+window.addEventListener("hashchange", () => {
+  if (!window.location.hash || window.location.hash === "#home") return;
+
+  const target = document.querySelector(window.location.hash);
+  if (target instanceof HTMLElement) {
+    scrollToAnchorTarget(target, { updateHash: false });
+  }
+});
+
+window.addEventListener("load", () => {
+  if (!window.location.hash || window.location.hash === "#home") return;
+
+  const target = document.querySelector(window.location.hash);
+  if (!(target instanceof HTMLElement)) return;
+
+  window.setTimeout(() => {
+    scrollToAnchorTarget(target, { updateHash: false, immediate: true });
+  }, 40);
+});
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
@@ -165,8 +269,6 @@ const revealNodes = document.querySelectorAll(".reveal");
 const splitTextNodes = Array.from(document.querySelectorAll(".split-text"));
 const aboutStatsSection = document.querySelector(".about-stats");
 const aboutStatNumbers = Array.from(document.querySelectorAll(".about-stat-number"));
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const shouldRevealImmediately = prefersReducedMotion || Boolean(window.location.hash);
 const splitGlueWords = new Set([
   "а",
   "и",

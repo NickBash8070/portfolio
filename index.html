@@ -22,51 +22,53 @@
 
     <main id="main-content">
       <section class="hero" id="home">
-        <div class="hero-noise" aria-hidden="true"></div>
-        <div class="hero-waves" aria-hidden="true"></div>
+        <div class="hero-stage">
+          <div class="hero-noise" aria-hidden="true"></div>
+          <div class="hero-waves" aria-hidden="true"></div>
 
-        <div class="hero-top">
-          <nav class="hero-nav" aria-label="Главная навигация">
+          <div class="hero-top">
+            <nav class="hero-nav" aria-label="Главная навигация">
+              <a href="#home">Главная</a>
+              <a href="#about">Обо мне</a>
+              <a href="#work">Кейсы</a>
+              <a href="#packages">Цены</a>
+              <a href="#contact">Контакты</a>
+            </nav>
+
+            <p class="hero-brand">© Николай Башкирев</p>
+
+            <a class="hero-talk" href="#contact">Обсудить проект</a>
+
+            <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+              <span class="menu-button-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+          </div>
+
+          <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <button class="menu-close" id="menu-close" type="button" aria-label="Закрыть меню">×</button>
             <a href="#home">Главная</a>
             <a href="#about">Обо мне</a>
+            <a href="#method">Процесс</a>
             <a href="#work">Кейсы</a>
             <a href="#packages">Цены</a>
+            <a href="#brief">Бриф</a>
             <a href="#contact">Контакты</a>
-          </nav>
+          </aside>
 
-          <p class="hero-brand">© Николай Башкирев</p>
+          <div class="hero-mid reveal">
+            <h2 class="hero-note split-text split-text-letters">Помогаю бизнесу выглядеть сильнее: сайты, презентации и визуальная подача под продажи.</h2>
+            <a class="hero-cases" href="#work">Смотреть кейсы</a>
+          </div>
 
-          <a class="hero-talk" href="#contact">Обсудить проект</a>
-
-          <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
-            <span class="menu-button-lines" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </button>
-        </div>
-
-        <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-          <button class="menu-close" id="menu-close" type="button" aria-label="Закрыть меню">×</button>
-          <a href="#home">Главная</a>
-          <a href="#about">Обо мне</a>
-          <a href="#method">Процесс</a>
-          <a href="#work">Кейсы</a>
-          <a href="#packages">Цены</a>
-          <a href="#brief">Бриф</a>
-          <a href="#contact">Контакты</a>
-        </aside>
-
-        <div class="hero-mid reveal">
-          <h2 class="hero-note split-text split-text-letters">Помогаю бизнесу выглядеть сильнее: сайты, презентации и визуальная подача под продажи.</h2>
-          <a class="hero-cases" href="#work">Смотреть кейсы</a>
-        </div>
-
-        <div class="hero-bottom reveal">
-          <div class="hero-meta">
-            <span>Мои навыки</span>
-            <a class="hero-email" href="mailto:nicolaibashkirev@gmail.com">nicolaibashkirev@gmail.com</a>
+          <div class="hero-bottom reveal">
+            <div class="hero-meta">
+              <span>Мои навыки</span>
+              <a class="hero-email" href="mailto:nicolaibashkirev@gmail.com">nicolaibashkirev@gmail.com</a>
+            </div>
           </div>
         </div>
       </section>
@@ -457,6 +459,7 @@
       </footer>
     </main>
 
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
